@@ -45,7 +45,7 @@ const EmailScreenController = ({navigation}: TEmailScreenProps) => {
     isLoading,
     data,
     error,
-    errors
+    errors,
   };
 };
 

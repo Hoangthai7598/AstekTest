@@ -4,17 +4,17 @@ import {RootState} from '../redux/store';
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://identitytoolkit.googleapis.com/v1/',
-  // prepareHeaders: (headers, {getState}) => {
-  //   // By default, if we have a token in the store, let's use that for authenticated requests
-  //   const token = (getState() as RootState).auth.token;
-  //   if (token) {
-  //     headers.set('authentication', `Bearer ${token}`);
-  //   }
-  //   return headers;
-  // },
+  prepareHeaders: (headers, {getState}) => {
+    // By default, if we have a token in the store, let's use that for authenticated requests
+    const token = (getState() as RootState).auth.token;
+    if (token) {
+      headers.set('authentication', `Bearer ${token}`);
+    }
+    return headers;
+  },
 });
 
-const baseQueryWithRetry = retry(baseQuery, {maxRetries: 6});
+const baseQueryWithRetry = retry(baseQuery, {maxRetries: 0});
 
 /**
  * Create a base API to inject endpoints into elsewhere.
